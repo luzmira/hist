@@ -1,0 +1,1000 @@
+  894  sudo apt install jq -y
+  895  kubectl get --raw /apis/metrics.k8s.io/v1beta1 | jq
+  896  kubectl top pods -n kube-system
+  897  helm repo add cowboysysop https://cowboysysop.github.io/charts/
+  898  helm install vpa cowboysysop/vertical-pod-autoscaler --namespace kube-system
+  899  kubectl get pod -n kube-system
+  900  ls
+  901  cd ke
+  902  cd kubernetes/
+  903  ls
+  904  mkdir app
+  905  cd app
+  906  mkdir datascientest-vpa
+  907  cd datascientest-vpa/
+  908  touch datascientest-vpa.yml
+  909  vi datascientest-vpa.yml 
+  910  kubectl apply -f datascientest-vpa.yml
+  911  kubectl get vpa
+  912  kubectl describe vpa datascientest-vpa
+  913  kubectl get pod | grep datascientest
+  914  cd..
+  915  cd ..
+  916  ls
+  917  mkdir forum
+  918  cd forum/
+  919  touch values.yml
+  920  vi values.yml 
+  921  helm install phpbb --namespace=forum --create-namespace --values=forum/values.yml datascientest/phpbb
+  922  cd ..
+  923  helm install phpbb --namespace=forum --create-namespace --values=forum/values.yml datascientest/phpbb
+  924  kubectl get all -n forum
+  925  kubectl get pv,pvc | grep phpbb
+  926  ls
+  927  cd forum/
+  928  ls
+  929  touch hpa.yml
+  930  vi hpa.yml 
+  931  cd ..
+  932  kubectl apply -f forum/hpa.yml 
+  933  kubectl get pod -n forum
+  934  kubectl get all -n forum
+  935  kubectl delete -f forum/hpa.yml
+  936  kubectl scale deploy phpbb -n forum --replicas=1
+  937  kubectl autoscale deploy phpbb -n forum --min=1 --max=5
+  938  kubectl get all -n forum
+  939  kubectl get deploy,svc -n forum
+  940  curl -L https://goo.gl/S1Dc3R | bash -s 10000 "http://13.40.28.224:32080"
+  941  watch kubectl get all -n forum
+  942  kubectl top Pod -n forum
+  943  kubectl top pod -n forum
+  944  kubectl describe hpa phpbb -n forum
+  945  kubectl get events -n forum
+  946  kubectl get all -n forum
+  947  kubectl get ingressclass
+  948  kubectl describe ingressclass traefik
+  949  kubectl get ingress
+  950  kubectl create deploy rancher --image=ruanbekker/logos:rancher --replicas=2
+  951  kubectl expose deploy rancher --port=80 --type=ClusterIP
+  952  cd ..
+  953  ls
+  954  mkdir ingress
+  955  cd ingress/
+  956  touch ingress.yml
+  957  vi ingress.yml 
+  958  cd ..
+  959  kubectl apply -f tp-ingress/ingress.yml
+  960  ls
+  961  cd ingress/
+  962  ls
+  963  cd ..
+  964  kubectl apply -f ingress/ingress.yml
+  965  kubectl get ingress
+  966  ls
+  967  cd kubernetes/
+  968  ls
+  969  cd ingress/
+  970  cd ..
+  971  kubectl get ingress
+  972  kubectl
+  973  kubectl get ingress
+  974  kubectl delete rancher-ingress
+  975  kubectl get ingress
+  976  kubectl delete rancher-ingress
+  977  ls
+  978  cd ingress/
+  979  ls
+  980  vi ingress.yml 
+  981  cd ..
+  982  kubectl apply -f ingress/ingress.yml
+  983  kubectl get ingree
+  984  kubectl get ingress
+  985  kubectl get crt
+  986  kubectl get crd
+  987  helm repo add jetstack https://charts.jetstack.io
+  988  helm repo update
+  989  helm install cert-manager jetstack/cert-manager --namespace cert-manager --create-namespace --version v1.10.1 --set installCRDs=true
+  990  curl -L -o kubectl-cert-manager.tar.gz https://github.com/jetstack/cert-manager/releases/latest/download/kubectl-cert_manager-linux-amd64.tar.gz
+  991  kubectl cert-manager check api
+  992  kubectl Cert-Manager check api
+  993  kubectl
+  994  kubectl cert-manager check api
+  995  kubectl cert-manager status
+  996  ls
+  997  mkdir sources
+  998  mv kubectl-cert-manager.tar.gz 
+  999  mv kubectl-cert-manager.tar.gz sources/
+ 1000  cd sources/
+ 1001  tar xzf kubectl-cert-manager.tar.gz
+ 1002  ls
+ 1003  sudo mv kubectl-cert_manager /usr/local/bin
+ 1004  kubectl cert-manager check api
+ 1005  ls
+ 1006  cd ..
+ 1007  ls
+ 1008  cd ingress/
+ 1009  ls
+ 1010  touch clusterissuer.yml
+ 1011  vi clusterissuer.yml 
+ 1012  kubectl create -f clusterissuer.yml 
+ 1013  kubectl get clusterissuers
+ 1014  kubectl get crd | grep cert-manager
+ 1015  ls
+ 1016  vi ingress.yml 
+ 1017  kubectl apply -f ingress.yml 
+ 1018  kubectl get certificate
+ 1019  ls
+ 1020  vi ingress.yml 
+ 1021  kubectl get certificate
+ 1022  ls
+ 1023  vi ingress.yml 
+ 1024  kubectl apply -f ingress.yml 
+ 1025  vi ingress.yml 
+ 1026  kubectl apply -f ingress.yml 
+ 1027  kubectl get certificate
+ 1028  ls
+ 1029  vi clusterissuer.yml 
+ 1030  vi ingress.yml 
+ 1031  kubectl get certificate
+ 1032  kubectl get secret | grep rancher
+ 1033  kubectl get secret rancher-secret -o jsonpath='{.Data}'
+ 1034  kubectl get certificate
+ 1035  kubectl apply -f ingress.yml 
+ 1036  kubectl get certificate
+ 1037  ls
+ 1038  vi ingress.yml 
+ 1039  cp ingress.yml ingress_no_cert.yml
+ 1040  vi ingress_no_cert.yml 
+ 1041  kubectl get certificate
+ 1042  kubectl apply -f ingress_no_cert.yml 
+ 1043  kubectl get certificate
+ 1044  vi ingress_no_cert.yml 
+ 1045  kubectl get certificate
+ 1046  vi ingress_no_cert.yml 
+ 1047  kubectl get certificate
+ 1048  kubectl get secret | grep rancher
+ 1049  kubectl get secret rancher-secret -o jsonpath='{.data}'
+ 1050  kubectl get ingress
+ 1051  kubectl describe ingress rancher-ingress
+ 1052  ls
+ 1053  cd kubernetes/
+ 1054  ls
+ 1055  cd ingress/
+ 1056  ls
+ 1057  rm ingress_no_cert.yml 
+ 1058  kubectl apply -f ingress.yml 
+ 1059  kubectl get certificate
+ 1060  kubectl describe ingress rancher-ingress
+ 1061  vi ingress.yml 
+ 1062  kubectl apply -f ingress.yml 
+ 1063  cat ingress.yml 
+ 1064  vi ingress.yml 
+ 1065  kubectl apply -f ingress.yml 
+ 1066  cat ingress.yml 
+ 1067  vi ingress.yml 
+ 1068  kubectl apply -f ingress.yml 
+ 1069  vi ingress.yml 
+ 1070  kubectl apply -f ingress.yml 
+ 1071  vi ingress.yml 
+ 1072  kubectl apply -f ingress.yml 
+ 1073  vi ingress.yml 
+ 1074  ls
+ 1075  cd kubernetes/
+ 1076  s
+ 1077  ls
+ 1078  cd ingress/
+ 1079  ls
+ 1080  vi ingress.yml 
+ 1081  clear
+ 1082  ls
+ 1083  kubectl describe ingress rancher-ingress
+ 1084  sudo snap install kustomize
+ 1085  sudo apt-get install snap
+ 1086  sudo snap install kustomize
+ 1087  sudo snap
+ 1088  snap
+ 1089  apt-get update
+ 1090  sudo apt-get update
+ 1091  sudo apt-get install snap
+ 1092  snap
+ 1093  sudo apt-get remove snap
+ 1094  sudo apt-get install snapd
+ 1095  sudo snap install kustomize
+ 1096  kustomize version
+ 1097  sudo kustomize version
+ 1098  sudo snap install kustomize
+ 1099  snap kustomize version
+ 1100  sudo snap kustomize version
+ 1101  kustomize version 
+ 1102  sudo kustomize version
+ 1103  kubectl --version
+ 1104  kubectl version
+ 1105  sudo snap remove kustomize
+ 1106  kustomize
+ 1107  Kustomize
+ 1108  sudo apt-get remove snap
+ 1109  sudo apt-get remove snapd
+ 1110  kubectl version
+ 1111  kustomize
+ 1112  kustomize version
+ 1113  ls
+ 1114  cd /usr/local/bin/
+ 1115  ls
+ 1116  kubectl version --short
+ 1117  Kustommize
+ 1118  Kustommize version
+ 1119  kustomize version
+ 1120  find / -name kustomize
+ 1121  find /bin -name kustomize
+ 1122  find /sbin -name kustomize
+ 1123  find /usr/sbin/ -name kubectl
+ 1124  find /usr/sbin/ -name kustomize
+ 1125  find / -name kustomize | more 
+ 1126  find / -name kustomize 
+ 1127  sudo ls 
+ 1128  sudo ls /root/
+ 1129  ls
+ 1130  cd kubernetes/
+ 1131  ls
+ 1132  free
+ 1133  tree
+ 1134  tree .
+ 1135  apt-get install tree
+ 1136  sudo apt-get install tree
+ 1137  tree .
+ 1138  ls
+ 1139  mkdir wordpress-datascientest
+ 1140  mkdir wordpress-datascientest/mysql
+ 1141  mkdir wordpress-datascientest/wordpress
+ 1142  cd wordpress-datascientest/
+ 1143  touch kustomization.yaml
+ 1144  touch patch.yaml
+ 1145  vi kustomization.yaml 
+ 1146  ls
+ 1147  vi patch.yaml 
+ 1148  ls
+ 1149  tree .
+ 1150  cd mysql/
+ 1151  touch deployement.yaml
+ 1152  vi deployement.yaml 
+ 1153  touch service.yaml
+ 1154  vi service.yaml 
+ 1155  touch secret.yaml
+ 1156  vi secret.yaml 
+ 1157  touch kustomization.yaml
+ 1158  vi kustomization.yaml 
+ 1159  ls
+ 1160  cd  ..
+ 1161  ls
+ 1162  cd wordpress/
+ 1163  touch deployment.yaml
+ 1164  vi deployment.yaml 
+ 1165  touch service.yaml
+ 1166  vi service.yaml 
+ 1167  touch kustomization.yaml
+ 1168  vi kustomization.yaml 
+ 1169  cd ..
+ 1170  ls
+ 1171  cd ..
+ 1172  tree wordpress-datascientest/
+ 1173  cat wordpress-datascientest/kustomization.yaml 
+ 1174  vi wordpress-datascientest/kustomization.yaml 
+ 1175  cat wordpress-datascientest/kustomization.yaml 
+ 1176  cat wordpress-datascientest/patch.yaml 
+ 1177  ls
+ 1178  cd kubernetes/
+ 1179  ls
+ 1180  tree wordpress-datascientest/
+ 1181  cat wordpress-datascientest/mysql/service.yaml 
+ 1182  cat wordpress-datascientest/mysql/secret.yaml 
+ 1183  cat wordpress-datascientest/mysql/kustomization.yaml 
+ 1184  ls
+ 1185  cd wordpress-datascientest/
+ 1186  ls
+ 1187  cd mysql/
+ 1188  ls
+ 1189  mv deployement.yaml deployment.yaml
+ 1190  cd ..
+ 1191  ls
+ 1192  cd wordpress/
+ 1193  ls
+ 1194  mv deployment.yaml deployment.yaml
+ 1195  ls
+ 1196  cd ..
+ 1197  tree wordpress-datascientest/
+ 1198  kustomize build wordpress-datascientest
+ 1199  kustomize -h
+ 1200  history | grep kube
+ 1201  kubectl version 
+ 1202  kustomize -h
+ 1203  kustomize build wordpress-datascientest
+ 1204  kustomize -h
+ 1205  ls
+ 1206  cd wordpress-datascientest/
+ 1207  ls
+ 1208  cat kustomization.yaml 
+ 1209  ls
+ 1210  cat patch.yaml 
+ 1211  kubectl -k -h
+ 1212  kubectl -k
+ 1213  cd  ..
+ 1214  ls
+ 1215  kubectl apply -k wordpress-datascientest/
+ 1216  ls
+ 1217  cd wordpress-datascientest/
+ 1218  ls
+ 1219  cd mysql/
+ 1220  ls
+ 1221  vi deployment.yaml 
+ 1222  cd ..
+ 1223  cd wordpress/
+ 1224  ls
+ 1225  vide
+ 1226  vi deployment.yaml 
+ 1227  cd ..
+ 1228  ls
+ 1229  cd mysql/
+ 1230  ls
+ 1231  vi deployment.yaml 
+ 1232  cd ..
+ 1233  ls
+ 1234  kubectl apply -k wordpress-datascientest/
+ 1235  tree
+ 1236  ls
+ 1237  tree wordpress-datascientest/
+ 1238  head wordpress-datascientest/mysql/deployment.yaml 
+ 1239  kubectl get all
+ 1240  kubectl delete -f wordpress-datascientest
+ 1241  sudo snap install kustomize
+ 1242  sudo apt-get install snap
+ 1243  sudo snap install kustomize
+ 1244  sudo apt-get install snapd
+ 1245  sudo snap install core
+ 1246  sudo snap install kustomize
+ 1247  kustomize
+ 1248  ls
+ 1249  kustomize build wordpress-datascientes
+ 1250  kustomize build wordpress-datascientest/
+ 1251  kubectl apply -k wordpress-datascientest/
+ 1252  kubectl delete -f wordpress-datascientest
+ 1253  reboot
+ 1254  sudo reboot
+ 1255  ls
+ 1256  cd kubernetes/
+ 1257  ls
+ 1258  kustomize build wordpress-datascientest/
+ 1259  kubectl apply -k wordpress-datascientest/
+ 1260  kubectl delete -f wordpress-datascientest
+ 1261  kubectl get all
+ 1262  kubectl delete -f deployment.apps/datascientest-mysql
+ 1263  kubectl delete deployment datascientest-mysql
+ 1264  kubectl delete deployment datascientest-wordpress
+ 1265  kubectl get all
+ 1266  kubectl delete service datascientest-mysql
+ 1267  kubectl delete service datascientest-wordpress
+ 1268  kustomize build wordpress-datascientest/
+ 1269  kubectl apply -k wordpress-datascientest/
+ 1270  kubectl get all
+ 1271  kubectl delete -f wordpress-datascientest
+ 1272  history
+ 1273  kubectl delete -f wordpress-datascientest
+ 1274  cat wordpress-datascientest/kustomization.yaml 
+ 1275  ls
+ 1276  cd ..
+ 1277  ls
+ 1278  cd kue
+ 1279  cd kubernetes/
+ 1280  ls
+ 1281  mkdir velero
+ 1282  cd velero/
+ 1283  wget https://github.com/vmware-tanzu/velero/releases/download/v1.10.0/velero-v1.10.0-linux-amd64.tar.gz
+ 1284  tar -zxvf velero-v1.10.0-linux-amd64.tar.gz
+ 1285  sudo mv velero-v1.10.0-linux-amd64/velero /usr/local/bin/
+ 1286  velero backup create datascientest-backup
+ 1287  velero
+ 1288  velero backup create datascientest-backup
+ 1289  velero
+ 1290  velero version
+ 1291  velero -version
+ 1292  velero -v
+ 1293  velero version
+ 1294  velero
+ 1295  kubectl logs deployment/velero -n velero
+ 1296  velero version
+ 1297  velero features 
+ 1298  velero client config get features
+ 1299  kubectl get namespaces
+ 1300  which velero
+ 1301  /usr/local/bin/k3s-uninstall.sh
+ 1302  curl -sfL https://get.k3s.io | K3S_TOKEN=SECRET sh -s - server --cluster-init
+ 1303  kubectl get nodes.
+ 1304  kubectl get nodes
+ 1305  sudo chmod 644 /etc/rancher/k3s/k3s.yaml
+ 1306  kubectl get nodes
+ 1307  kubectl get all
+ 1308  kubectl create deploy nginx-datascientest --image=nginx --replicas=3
+ 1309  kubectl expose deploy nginx-datascientest --port=80 --type=NodePort
+ 1310  kubectl get all
+ 1311  ls
+ 1312  cd ..
+ 1313  mkdir backups
+ 1314  sudo k3s etcd-snapshot save --etcd-snapshot-dir=/home/admin/kubernetes/backups
+ 1315  ls
+ 1316  tree backups/
+ 1317  ls backups/
+ 1318  ls backups/on-demand-ip-10-10-1-36-1693774141 
+ 1319  sudo k3s etcd-snapshot ls --etcd-snapshot-dir=/home/admin/kubernetes/backups
+ 1320  mkdir -p /home/admin/.rancher/k3s/server/tls/etcd/
+ 1321  sudo cat /var/lib/rancher/k3s/server/tls/client-ca.crt > /home/admin/.rancher/k3s/server/tls/etcd/client.crt
+ 1322  sudo cat /var/lib/rancher/k3s/server/tls/client-ca.key > /home/admin/.rancher/k3s/server/tls/etcd/client.key
+ 1323  sudo apt-get install vagrant -t
+ 1324  sudo apt-get install vagrant -y
+ 1325  vagrant plugin install docker
+ 1326  sudo apt-get install ca-certificates curl gnupg lsb-release -y
+ 1327  sudo mkdir -p /etc/apt/keyrings
+ 1328  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+ 1329  echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+ 1330  sudo apt-get update -y
+ 1331  sudo apt-get update
+ 1332  vi /etc/apt/sources.list
+ 1333  vi /etc/apt/sources.list.d/docker.list 
+ 1334  curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+ 1335  echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+ 1336  sudo apt-get update
+ 1337  sudo apt-get install docker-ce docker-ce-cli containerd.io
+ 1338  sudo systemctl enable --now docker
+ 1339  ls
+ 1340  mkdir vagrant
+ 1341  cd vagrant/
+ 1342  touch Dockerfile
+ 1343  vi Dockerfile 
+ 1344  ls
+ 1345  touch Vagrantfile
+ 1346  vi Vagrantfile 
+ 1347  ls
+ 1348  vagrant up
+ 1349  sudo vagrant up
+ 1350  vagrant ssh backup-server
+ 1351  ls
+ 1352  cat Dockerfile 
+ 1353  vagrant ssh backupserver
+ 1354  ls
+ 1355  vi Vagrantfile 
+ 1356  vi Dockerfile 
+ 1357  vagrant up 
+ 1358  sudo vagrant upo
+ 1359  sudo vagrant up
+ 1360  sudo vagrant ssh backupserver
+ 1361  ls
+ 1362  vagrant ssh backupserver
+ 1363  sudo groupadd docker
+ 1364  sudo usermod -aG docker $USER
+ 1365  vagrant ssh backupserver
+ 1366  sudo vagrant up
+ 1367  vagrant ssh backupserver
+ 1368  reboot
+ 1369  sudo reboot
+ 1370  ls
+ 1371  cd kubernetes/
+ 1372  ls
+ 1373  cd vagrant/
+ 1374  ls
+ 1375  vagrant up
+ 1376  vagrant ssh backupserver
+ 1377  sudo vagrant up
+ 1378  ls
+ 1379  vi Vagrantfile 
+ 1380  ls
+ 1381  vi Dockerfile 
+ 1382  halt
+ 1383  sudo halt
+ 1384  ls
+ 1385  cd kubernetes/
+ 1386  ls
+ 1387  cd vagrant/
+ 1388  vagrant up
+ 1389  sudo systemctl status docker
+ 1390  sudo usermod -aG docker admin
+ 1391  vagrant up
+ 1392  docker ps -a
+ 1393  docker ls 
+ 1394  docker container ls
+ 1395  ls
+ 1396  vi Vagrantfile 
+ 1397  vi Dockerfile 
+ 1398  ls
+ 1399  vi Dockerfile 
+ 1400  ls
+ 1401  docker build -f Dockerfile 
+ 1402  docker ps -a
+ 1403  docker start backupserver
+ 1404  docker exec -it backupserver bash
+ 1405  vagrant ssh backup-server
+ 1406  vagrant ssh backupserver
+ 1407  vagrant ssh-config
+ 1408  vagrant ssh backupserver
+ 1409  mkdir /home/vagrant/backups
+ 1410  kustomize -version
+ 1411  kustomize help
+ 1412  ssh vagrant@127.0.0.1 -p 2222 -i /home/admin/.vagrant.d/insecure_private_key
+ 1413  ls /home/admin/.vagrant.d/
+ 1414  docker exec -it backupserver bash
+ 1415  ssh vagrant@127.0.0.1 -p 2222 -i /home/admin/.vagrant.d/insecure_private_key
+ 1416  docker exec -it backupserver bash
+ 1417  ls
+ 1418  vi Vagrantfile 
+ 1419  vi Dockerfile 
+ 1420  docker container ls 
+ 1421  docker container rm backupserver
+ 1422  docker exec -it backupserver bash
+ 1423  docker logs backupserver
+ 1424  docker containter ls -a
+ 1425  docker logs backupserver
+ 1426  docker container ls
+ 1427  docker exec -it backupserver bash 
+ 1428  ls
+ 1429  pwd
+ 1430  tree
+ 1431  ls
+ 1432  pwd
+ 1433  ls
+ 1434  cat Vagrantfile 
+ 1435  ls
+ 1436  docker build -t didier:backupserver .
+ 1437  vi Vagrantfile 
+ 1438  vagrant up
+ 1439  docker stop backupserver
+ 1440  docker container rm backupserver
+ 1441  vagrant up
+ 1442  usermod -aG docker admin
+ 1443  history
+ 1444  sudo usermod -aG docker admin
+ 1445  vagrant up
+ 1446  history | grep docker
+ 1447  sudo apt-get install docker-ce docker-ce-cli containerd.io
+ 1448  vagrant up
+ 1449  sudo vagrant up
+ 1450  docker container ps -a
+ 1451  ls
+ 1452  vi Vagrantfile 
+ 1453  ls
+ 1454  vi Dockerfile c
+ 1455  vi Dockerfile 
+ 1456  ls
+ 1457  docker start backupserver
+ 1458  docker exec -it backupserver bash
+ 1459  ls
+ 1460  vi Dockerfile 
+ 1461  docker stop backupserver
+ 1462  docker rm backupserver
+ 1463  vagrant up 
+ 1464  sudo vagrant up 
+ 1465  vi Dockerfile 
+ 1466  vagrant plugin reinstall docker
+ 1467  vagrant plugin repair docker
+ 1468  sudo vagrant plugin repair docker
+ 1469  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+ 1470  echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+ 1471  sudo apt-get update -y
+ 1472  curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+ 1473  echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+ 1474  sudo apt-get update -y
+ 1475  sudo apt-get install docker-ce docker-ce-cli containerd.io
+ 1476  sudo systemctl enable --now docker
+ 1477  ls
+ 1478  LS
+ 1479  Ls
+ 1480  ls
+ 1481  docker container ls -a
+ 1482  ip addr
+ 1483  docker start backupserver
+ 1484  ping 192.168.10.10
+ 1485  ssh 192.168.10.10
+ 1486  docker exec -it backupserver bash
+ 1487  ls
+ 1488  vi Dockerfile 
+ 1489  vi Vagrantfile 
+ 1490  docker stop backupserver
+ 1491  docker rm backupserver
+ 1492  vagrant up 
+ 1493  vagrant plugin install ffi
+ 1494  vagrant up 
+ 1495  df -h
+ 1496  vagrant plugin uninstall ffi
+ 1497  docker container ls 
+ 1498  docker container ls -a
+ 1499  ls
+ 1500  docker build -f Dockerfile 
+ 1501  history | grep docker build
+ 1502  history | grep docker 
+ 1503  vi Dockerfile 
+ 1504  history 
+ 1505  history | grep docker 
+ 1506  docker build -t didier:backupserver .
+ 1507  docker container ls 
+ 1508  docker container ls  -a
+ 1509  ls
+ 1510  docker ls -a
+ 1511  docker containter ps -a
+ 1512  vi Vagrantfile 
+ 1513  vagrant up 
+ 1514  sudo vagrant up 
+ 1515  vagran ssh backupserver
+ 1516  vagrant ssh backupserver
+ 1517  docker container ls 
+ 1518  docker exec -it backupserver bash
+ 1519  ssh 192.168.10.10
+ 1520  vagrant ssh backupserver
+ 1521  sudo vagrant ssh backupserver
+ 1522  ls
+ 1523  cd ..
+ 1524  ls
+ 1525  cd backups/
+ 1526  ls
+ 1527  cd ..
+ 1528  sudo rsync -a /home/admin/kubernetes/backups/ vagrant@192.168.10.10:/home/vagrant/backups
+ 1529  sudo vagrant ssh backupserver
+ 1530  ls
+ 1531  cd vagrant/
+ 1532  sudo vagrant ssh backupserver
+ 1533  ls
+ 1534  cd  ..
+ 1535  ls
+ 1536  cd backups/
+ 1537  ls
+ 1538  /usr/local/bin/k3s-uninstall.sh
+ 1539  kubectl get nodes
+ 1540  sudo snap install kubectl
+ 1541  curl -sfL https://get.k3s.io | K3S_TOKEN=SECRET sh -s - server --cluster-init
+ 1542  sudo chmod 644 /etc/rancher/k3s/k3s.yaml
+ 1543  historu 
+ 1544  history | grep k3s
+ 1545  history | more 
+ 1546  kubectl get nodes
+ 1547  kubectl get all
+ 1548  sudo systemctl stop k3s
+ 1549  ls
+ 1550  sudo k3s server --cluster-reset --cluster-reset-restore-path=on-demand-ip-10-10-1-36-1693774141
+ 1551  ls
+ 1552  cd ..
+ 1553  ls
+ 1554  cd vagrant/
+ 1555  ls
+ 1556  vagrant ssh backupserver
+ 1557  sudo vagrant ssh backupserver
+ 1558  cd ..
+ 1559  ls
+ 1560  cd backups/
+ 1561  ls
+ 1562  ls -lath 
+ 1563  sudo k3s server --cluster-reset --cluster-reset-restore-path=on-demand-ip-10-10-1-36-1693774141
+ 1564  kubeclt get all
+ 1565  kubeclt get nodes
+ 1566  sudo k3s server --cluster-reset --cluster-reset-restore-path=/home/admin/kubernetes/backups/on-demand-ip-10-10-1-36-1693774141
+ 1567  sudo systemctl start k3s
+ 1568  sudo chmod 644 /etc/rancher/k3s/k3s.yaml
+ 1569  kubectl get all
+ 1570  ls
+ 1571  cd ..
+ 1572  ls
+ 1573  cd ..
+ 1574  ls
+ 1575  mkdir github
+ 1576  cd github/
+ 1577  ls
+ 1578  mkdir repo1
+ 1579  cd repo1/
+ 1580  git clone https://github.com/luzmira/github_actions.git
+ 1581  ls
+ 1582  cd  ..
+ 1583  ls
+ 1584  mv repo1/ repos
+ 1585  s
+ 1586  ls
+ 1587  cd repos/
+ 1588  ls
+ 1589  cd github_actions/
+ 1590  ls
+ 1591  mkdir -p .github/workflows
+ 1592  cd .github/workflows/
+ 1593  touch my_first_workflow.yml 
+ 1594  vi my_first_workflow.yml 
+ 1595  git commit -m "my first action"
+ 1596  cd ..
+ 1597  git add workflows/
+ 1598  git commit -m "init my first action"
+ 1599  git push 
+ 1600  git commit -m "init my first action"
+ 1601  git push 
+ 1602  cat /home/admin/.ssh/id_ed25519.pub 
+ 1603  history | grep sshkeygen
+ 1604  history | grep ssh
+ 1605  history | grep ssh-keygen
+ 1606  ssk-keygen -t ed25519
+ 1607  ssh-keygen -t ed25519
+ 1608  ls
+ 1609  cat github_actions.pub 
+ 1610  mv github* /home/admin/.ssh/
+ 1611  git push 
+ 1612  cd ..
+ 1613  ls
+ 1614  git remote add origin git@github.com:luzmira/github_actions.git
+ 1615  git remove -v
+ 1616  git remote -v
+ 1617  git remote
+ 1618  git push
+ 1619  ls
+ 1620  cd ..
+ 1621  ls
+ 1622  rm -rf github_actions/
+ 1623  git clone git@github.com:luzmira/github_actions.git
+ 1624  ls
+ 1625  cd github_actions/
+ 1626  ls
+ 1627  mkdir -p .github/workflows
+ 1628  cd .github/workflows/
+ 1629  ls
+ 1630  touch my_first_workflow.yml
+ 1631  vi my_first_workflow.yml 
+ 1632  ls
+ 1633  cd ..
+ 1634  ls
+ 1635  git ..
+ 1636  ls
+ 1637  cd ..
+ 1638  ls
+ 1639  ls -lath 
+ 1640  git add .github/
+ 1641  git commit -m "my first action"
+ 1642  git push 
+ 1643  ls
+ 1644  cd ..
+ 1645  ls
+ 1646  cd ..
+ 1647  ls
+ 1648  cd repos/
+ 1649  ls
+ 1650  rm -rf github_actions/
+ 1651  git clone https://github.com/luzmira/github_actions.git
+ 1652  ls 
+ 1653  cd github_actions/
+ 1654  l
+ 1655  ls
+ 1656  ls -lath 
+ 1657  cd .github/
+ 1658  ls
+ 1659  cd workflows/
+ 1660  ls
+ 1661  vi my_first_workflow.yml 
+ 1662  ls
+ 1663  cd ..
+ 1664  ls
+ 1665  cd ..
+ 1666  ls
+ 1667  rm -rf github_actions/
+ 1668  git clone https://github.com/luzmira/github_actions.git
+ 1669  ls
+ 1670  cd github_actions/
+ 1671  ls
+ 1672  ls -lath 
+ 1673  touch test
+ 1674  vi test 
+ 1675  git add test t
+ 1676  git add test
+ 1677  git commit -m "test"
+ 1678  git push
+ 1679  ls
+ 1680  vi test 
+ 1681  git add test 
+ 1682  git commit -m "test 2" 
+ 1683  git push 
+ 1684  git config — global credential.helper store
+ 1685  git config —global credential.helper store
+ 1686  git config --global credential.helper store
+ 1687  git push 
+ 1688  ls
+ 1689  vi test 
+ 1690  git add test 
+ 1691  git commit -m "autre test"
+ 1692  git push 
+ 1693  git config --global credential.helper store
+ 1694  git status
+ 1695  ls
+ 1696  git fetch
+ 1697  git branch br1
+ 1698  git checkout br1
+ 1699  ls
+ 1700  git push -u origin br1
+ 1701  ls
+ 1702  cd github/
+ 1703  ls
+ 1704  cd repos/
+ 1705  ls
+ 1706  cd github_actions/
+ 1707  ls
+ 1708  cd te
+ 1709  ls
+ 1710  cd ..
+ 1711  ls
+ 1712  cd ..
+ 1713  ls
+ 1714  cd repos/
+ 1715  ls
+ 1716  cd github_actions/
+ 1717  ls
+ 1718  rm test 
+ 1719  git commit -m "remove test" 
+ 1720  git push
+ 1721  git fetch
+ 1722  ls -lath 
+ 1723  tree .
+ 1724  ls .git
+ 1725  ls .github/
+ 1726  ls .github/workflows/
+ 1727  cat .github/workflows/my_first_workflow.yml 
+ 1728  ls
+ 1729  cd ..
+ 1730  ls
+ 1731  ls -lath 
+ 1732  tree
+ 1733  tree h
+ 1734  tree -ls
+ 1735  tree -lath 
+ 1736  ls
+ 1737  cd ..
+ 1738  ls
+ 1739  cd repos
+ 1740  ls
+ 1741  git clone https://github.com/luzmira/test2.git
+ 1742  ls
+ 1743  cd test2/
+ 1744  ls
+ 1745  mkdir -p .github/workflows
+ 1746  cd .github/workflows/
+ 1747  touch my_first_workflow.yml
+ 1748  vi my_first_workflow.yml 
+ 1749  ls
+ 1750  cd ..
+ 1751  ls
+ 1752  cd ..
+ 1753  ls
+ 1754  git commit -m "my first action" 
+ 1755  git push 
+ 1756  git add 
+ 1757  git add .github/workflows/
+ 1758  git commit -m "my first action" 
+ 1759  git push 
+ 1760  ls
+ 1761  ls -lath 
+ 1762  cd .git
+ 1763  cd ..
+ 1764  cd .github/
+ 1765  ls
+ 1766  cd workflows/
+ 1767  ls
+ 1768  vi my_first_workflow.yml 
+ 1769  git commit -m "test"
+ 1770  git push
+ 1771  ls
+ 1772  cd github/
+ 1773  ls
+ 1774  cd repos/
+ 1775  ls
+ 1776  cd test2/
+ 1777  ls
+ 1778  cd .github/
+ 1779  ls
+ 1780  cd workflows/
+ 1781  ls
+ 1782  vi my_first_workflow.yml 
+ 1783  ls
+ 1784  git add  my_first_workflow.yml 
+ 1785  git commit -m "test"
+ 1786  git push
+ 1787  ls
+ 1788  touch multiple_shell.yml
+ 1789  vi multiple_shell.yml 
+ 1790  git add  multiple_shell.yml 
+ 1791  git commit -m "multiple shell"
+ 1792  git push
+ 1793  ls
+ 1794  cd kubernetes/
+ 1795  ls
+ 1796  terraform init
+ 1797  wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg
+ 1798  ls
+ 1799  ls -lath 
+ 1800  echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+ 1801  sudo apt-get update && sudo apt-get install terraform -y
+ 1802  terraform --version
+ 1803  ls
+ 1804  cd ..
+ 1805  ls
+ 1806  mkdir terraform
+ 1807  cd terraform/
+ 1808  terraform init
+ 1809  touch main.tf
+ 1810  vi main.tf 
+ 1811  cat main.tf 
+ 1812  terraform init
+ 1813  ls -lath 
+ 1814  git clone https://github.com/luzmira/terra.git
+ 1815  ls
+ 1816  mv * terra/
+ 1817  ls
+ 1818  ls -lath 
+ 1819  cd ..
+ 1820  ls
+ 1821  cd terraform/
+ 1822  ls
+ 1823  cd terra/
+ 1824  ls
+ 1825  ls -lath 
+ 1826  mv .git ..
+ 1827  mv main.tf 
+ 1828  mv main.tf  ..
+ 1829  ls
+ 1830  cd ..
+ 1831  rm -rf terra/r
+ 1832  ls
+ 1833  rm -rf terra/
+ 1834  ls
+ 1835  ls -lath 
+ 1836  git add main.tf 
+ 1837  git commit -m "init terra main"
+ 1838  git push
+ 1839  ls
+ 1840  cd  ..
+ 1841  ls
+ 1842  cd kubernetes/
+ 1843  ls
+ 1844  git clone https://github.com/luzmira/kube.git
+ 1845  ls
+ 1846  cd kube/
+ 1847  ls
+ 1848  ls -lath 
+ 1849  mv .git/ ..
+ 1850  ls
+ 1851  cd ..
+ 1852  ls
+ 1853  rm -rf kube/
+ 1854  ls
+ 1855  git add 
+ 1856  git add *
+ 1857  ls
+ 1858  ls app
+ 1859  cd app/
+ 1860  ls
+ 1861  cd datascientest-vpa/
+ 1862  ls
+ 1863  cd ..
+ 1864  ls
+ 1865  cd ..
+ 1866  ls
+ 1867  git add app/
+ 1868  git add helm/
+ 1869  cd helm/
+ 1870  ls
+ 1871  tree .
+ 1872  cd 
+ 1873  ls
+ 1874  cd terraform/
+ 1875  ls
+ 1876  vi main.tf 
+ 1877  git add main.tf 
+ 1878  git commit -m "set version to 2.9.0"
+ 1879  git push
+ 1880  ls
+ 1881  cd ..
+ 1882  ls
+ 1883  git clone https://github.com/luzmira/hist.git
+ 1884  ls
+ 1885  cd hist/
+ 1886  ls
+ 1887  mkdir aws_ec2_cours_ds
+ 1888  git add aws_ec2_cours_ds/
+ 1889  cd aws_ec2_cours_ds/
+ 1890  ls
+ 1891  history > .
+ 1892  ls
+ 1893  history > cmd_histo
